@@ -8,10 +8,13 @@ const OPENEMR_REGISTRATION_URL = 'https://localhost:9300/oauth2/default/registra
 const main = async () => {
   try {
     const registrationPayload = {
-      client_name: 'My API Client App',
-      token_endpoint_auth_method: 'client_secret_basic',
-      scope: 'system/Patient.read api:oemr api:fhir'
-    };
+        // "application_type": "private",
+        "client_name": "My API Client App",
+        "token_endpoint_auth_method": "client_secret_basic",
+        "grant_types": ["client_credentials"],
+        "redirect_uris": ["https://myapp.local/callback"],
+        "scope": "api:oemr api:fhir"
+      };
 
     const response = await fetch(OPENEMR_REGISTRATION_URL, {
       method: 'POST',
